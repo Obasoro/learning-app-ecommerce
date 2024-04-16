@@ -1,0 +1,18 @@
+image:
+  file: .gitpod.Dockerfile
+
+ports:
+  - port: 80
+    onOpen: open-preview
+
+tasks:
+  - name: Install dependencies
+    command: |
+      apt-get update && apt-get install -y default-mysql-client
+      docker-php-ext-install mysqli pdo_mysql
+      a2enmod rewrite
+
+  - name: Start Apache
+    init: true
+    command: apache2-foreground
+
